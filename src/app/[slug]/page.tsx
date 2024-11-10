@@ -21,6 +21,9 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
   const product = products.items[0];
 
   return (
+    <>
+    <br></br>
+    <br></br>
     <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-16">
       {/* IMG */}
       <div className="w-full lg:w-1/2 lg:sticky top-20 h-max">
@@ -29,7 +32,7 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
       {/* TEXTS */}
       <div className="w-full lg:w-1/2 flex flex-col gap-6">
         <h1 className="text-4xl font-medium">{product.name}</h1>
-        <p className="text-gray-500">{product.description}</p>
+        <p className="text-white">{product.description}</p>
         <div className="h-[2px] bg-gray-100" />
         {product.price?.price === product.price?.discountedPrice ? (
           <h2 className="font-medium text-2xl">${product.price?.price}</h2>
@@ -61,7 +64,7 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
         {product.additionalInfoSections?.map((section: any) => (
           <div className="text-sm" key={section.title}>
             <h4 className="font-medium mb-4">{section.title}</h4>
-            <p>{section.description}</p>
+            <p>{section.description}</p> 
           </div>
         ))}
         <div className="h-[2px] bg-gray-100" />
@@ -72,6 +75,9 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
         </Suspense>
       </div>
     </div>
+    <br></br>
+    <br></br>
+    </>
   );
 };
 

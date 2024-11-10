@@ -70,7 +70,7 @@ const NavIcons = () => {
         alt=""
         width={22}
         height={22}
-        className="cursor-pointer"
+        className="cursor-pointer hidden "
         // onClick={login}
         onClick={handleProfile}
       />
@@ -87,7 +87,7 @@ const NavIcons = () => {
         alt=""
         width={22}
         height={22}
-        className="cursor-pointer"
+        className="cursor-pointe hidden"
       />
       <div
         className="relative cursor-pointer"

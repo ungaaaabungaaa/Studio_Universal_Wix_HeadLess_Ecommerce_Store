@@ -16,95 +16,130 @@ const ProductList = async ({
   limit?: number;
   searchParams?: any;
 }) => {
-  const wixClient = await wixClientServer();
+  try {
+    const wixClient = await wixClientServer();
 
-  const productQuery = wixClient.products
-    .queryProducts()
-    .startsWith("name", searchParams?.name || "")
-    .eq("collectionIds", categoryId)
-    .hasSome(
+    // Start building the query
+    let productQuery = wixClient.products.queryProducts();
+
+    // Add name filter if provided
+    if (searchParams?.name) {
+      productQuery = productQuery.startsWith("name", searchParams.name);
+    }
+
+    // Add category filter only if categoryId is valid
+    if (categoryId && categoryId !== "all") {
+      productQuery = productQuery.eq("collectionIds", categoryId);
+    }
+
+    // Add product type filter
+    productQuery = productQuery.hasSome(
       "productType",
       searchParams?.type ? [searchParams.type] : ["physical", "digital"]
-    )
-    .gt("priceData.price", searchParams?.min || 0)
-    .lt("priceData.price", searchParams?.max || 999999)
-    .limit(limit || PRODUCT_PER_PAGE)
-    .skip(
-      searchParams?.page
-        ? parseInt(searchParams.page) * (limit || PRODUCT_PER_PAGE)
-        : 0
     );
-  // .find();
 
-  if (searchParams?.sort) {
-    const [sortType, sortBy] = searchParams.sort.split(" ");
+    // Add price range filters
+    productQuery = productQuery
+      .gt("priceData.price", searchParams?.min || 0)
+      .lt("priceData.price", searchParams?.max || 999999);
 
-    if (sortType === "asc") {
-      productQuery.ascending(sortBy);
+    // Add pagination
+    productQuery = productQuery
+      .limit(limit || PRODUCT_PER_PAGE)
+      .skip(
+        searchParams?.page
+          ? parseInt(searchParams.page) * (limit || PRODUCT_PER_PAGE)
+          : 0
+      );
+
+    // Add sorting if provided
+    if (searchParams?.sort) {
+      const [sortType, sortBy] = searchParams.sort.split(" ");
+      if (sortType === "asc") {
+        productQuery = productQuery.ascending(sortBy);
+      }
+      if (sortType === "desc") {
+        productQuery = productQuery.descending(sortBy);
+      }
     }
-    if (sortType === "desc") {
-      productQuery.descending(sortBy);
+
+    const res = await productQuery.find();
+
+    // If no products found, return empty state
+    if (!res.items.length) {
+      return (
+        <div className="mt-12 text-center">
+          <p className="text-gray-500">No products found</p>
+        </div>
+      );
     }
-  }
 
-  const res = await productQuery.find();
-
-  return (
-    <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
-      {res.items.map((product: products.Product) => (
-        <Link
-          href={"/" + product.slug}
-          className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
-          key={product._id}
-        >
-          <div className="relative w-full h-80">
-            <Image
-              src={product.media?.mainMedia?.image?.url || "/product.png"}
-              alt=""
-              fill
-              sizes="25vw"
-              className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
-            />
-            {product.media?.items && (
+    return (
+      <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
+        {res.items.map((product: products.Product) => (
+          <Link
+            href={"/" + product.slug}
+            className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
+            key={product._id}
+          >
+            <div className="relative w-full h-80">
               <Image
-                src={product.media?.items[1]?.image?.url || "/product.png"}
-                alt=""
+                src={product.media?.mainMedia?.image?.url || "/product.png"}
+                alt={product.name}
                 fill
                 sizes="25vw"
-                className="absolute object-cover rounded-md"
+                className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
+              />
+              {product.media?.items && product.media.items[1] && (
+                <Image
+                  src={product.media.items[1].image?.url || "/product.png"}
+                  alt={`${product.name} hover`}
+                  fill
+                  sizes="25vw"
+                  className="absolute object-cover rounded-md"
+                />
+              )}
+            </div>
+            <div className="flex justify-between">
+              <span className="font-medium">{product.name}</span>
+              <span className="font-semibold">
+                ${product.price?.price?.toFixed(2)}
+              </span>
+            </div>
+            {product.additionalInfoSections && (
+              <div
+                className="text-sm text-gray-500"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(
+                    product.additionalInfoSections.find(
+                      (section: any) => section.title === "shortDesc"
+                    )?.description || ""
+                  ),
+                }}
               />
             )}
-          </div>
-          <div className="flex justify-between">
-            <span className="font-medium">{product.name}</span>
-            <span className="font-semibold">${product.price?.price}</span>
-          </div>
-          {product.additionalInfoSections && (
-            <div
-              className="text-sm text-gray-500"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(
-                  product.additionalInfoSections.find(
-                    (section: any) => section.title === "shortDesc"
-                  )?.description || ""
-                ),
-              }}
-            ></div>
-          )}
-          <button className="rounded-2xl ring-1 ring-lama text-lama w-max py-2 px-4 text-xs hover:bg-lama hover:text-white">
-            Add to Cart
-          </button>
-        </Link>
-      ))}
-      {searchParams?.cat || searchParams?.name ? (
-        <Pagination
-          currentPage={res.currentPage || 0}
-          hasPrev={res.hasPrev()}
-          hasNext={res.hasNext()}
-        />
-      ) : null}
-    </div>
-  );
+            <button className="rounded-2xl  text-black bg-white w-max py-2 px-4 text-xs hover:bg-black hover:text-white hover:border-white">
+              Add to Cart
+            </button>
+          </Link>
+        ))}
+        {(searchParams?.cat || searchParams?.name) && (
+          <Pagination
+            currentPage={res.currentPage || 0}
+            hasPrev={res.hasPrev()}
+            hasNext={res.hasNext()}
+          />
+        )}
+      </div>
+    );
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return (
+      <div className="mt-12 text-center">
+        <p className="text-red-500">Error loading products. Please try again later.</p>
+      </div>
+    );
+  }
 };
 
 export default ProductList;

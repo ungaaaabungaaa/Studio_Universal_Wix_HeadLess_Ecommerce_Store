@@ -7,27 +7,27 @@ import { useEffect, useState } from "react";
 const slides = [
   {
     id: 1,
-    title: "Summer Sale Collections",
+    title: "Summer Sale",
     description: "Sale! Up to 50% off!",
-    img: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://images.pexels.com/photos/157675/fashion-men-s-individuality-black-and-white-157675.jpeg?auto=compress&cs=tinysrgb&w=1200",
     url: "/",
-    bg: "bg-gradient-to-r from-yellow-50 to-pink-50",
+    bg: "bg-black",
   },
   {
     id: 2,
-    title: "Winter Sale Collections",
+    title: "Winter Sale",
     description: "Sale! Up to 50% off!",
-    img: "https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://images.pexels.com/photos/2466756/pexels-photo-2466756.jpeg?auto=compress&cs=tinysrgb&w=800",
     url: "/",
-    bg: "bg-gradient-to-r from-pink-50 to-blue-50",
+    bg: "bg-black",
   },
   {
     id: 3,
-    title: "Spring Sale Collections",
+    title: "Spring Sale",
     description: "Sale! Up to 50% off!",
-    img: "https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://images.pexels.com/photos/1040384/pexels-photo-1040384.jpeg?auto=compress&cs=tinysrgb&w=800",
     url: "/",
-    bg: "bg-gradient-to-r from-blue-50 to-yellow-50",
+    bg: "bg-black",
   },
 ];
 
@@ -54,7 +54,7 @@ const Slider = () => {
             key={slide.id}
           >
             {/* TEXT CONTAINER */}
-            <div className="h-1/2 xl:w-1/2 xl:h-full flex flex-col items-center justify-center gap-8 2xl:gap-12 text-center">
+            <div className="h-1/2 xl:w-1/2 xl:h-full flex flex-col items-center justify-center gap-8 2xl:gap-12 text-center text-white">
               <h2 className="text-xl lg:text-3xl 2xl:text-5xl">
                 {slide.description}
               </h2>
@@ -62,7 +62,7 @@ const Slider = () => {
                 {slide.title}
               </h1>
               <Link href={slide.url}>
-                <button className="rounded-md bg-black text-white py-3 px-4 ">
+                <button className="rounded-md bg-white text-black py-3 px-4 ">
                   SHOP NOW
                 </button>
               </Link>
@@ -83,14 +83,14 @@ const Slider = () => {
       <div className="absolute m-auto left-1/2 bottom-8 flex gap-4">
         {slides.map((slide, index) => (
           <div
-            className={`w-3 h-3  rounded-full ring-1 ring-gray-600 cursor-pointer flex items-center justify-center ${
+            className={`w-3 h-3  rounded-full ring-1 ring-white cursor-pointer flex items-center justify-center ${
               current === index ? "scale-150" : ""
             }`}
             key={slide.id}
             onClick={() => setCurrent(index)}
           >
             {current === index && (
-              <div className="w-[6px] h-[6px] bg-gray-600 rounded-full"></div>
+              <div className="w-[6px] h-[6px] bg-white rounded-full"></div>
             )}
           </div>
         ))}

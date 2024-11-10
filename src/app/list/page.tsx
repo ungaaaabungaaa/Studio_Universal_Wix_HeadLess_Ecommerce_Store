@@ -13,6 +13,9 @@ const ListPage = async ({ searchParams }: { searchParams: any }) => {
   );
 
   return (
+    <>
+    <br></br>
+    <br></br>
     <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative">
       {/* CAMPAIGN */}
       <div className="hidden bg-pink-50 px-4 sm:flex justify-between h-64">
@@ -42,6 +45,9 @@ const ListPage = async ({ searchParams }: { searchParams: any }) => {
         />
       </Suspense>
     </div>
+    <br></br>
+    <br></br>
+   </>
   );
 };
 

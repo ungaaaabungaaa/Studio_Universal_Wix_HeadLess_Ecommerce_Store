@@ -1,104 +1,57 @@
-import Image from "next/image";
-import Link from "next/link";
+import { VelocityScroll } from "./VelocityScroll";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <div className="py-24 px-4 md:px-8 lg:px-16 xl:32 2xl:px-64 bg-gray-100 text-sm mt-24">
-      {/* TOP */}
-      <div className="flex flex-col md:flex-row justify-between gap-24">
-        {/* LEFT */}
-        <div className="w-full md:w-1/2 lg:w-1/4 flex flex-col gap-8">
-          <Link href="/">
-            <div className="text-2xl tracking-wide">LAMA</div>
-          </Link>
-          <p>
-            3252 Winding Way, Central Plaza, Willowbrook, CA 90210, United
-            States
-          </p>
-          <span className="font-semibold">hello@lama.dev</span>
-          <span className="font-semibold">+1 234 567 890</span>
-          <div className="flex gap-6">
-            <Image src="/facebook.png" alt="" width={16} height={16} />
-            <Image src="/instagram.png" alt="" width={16} height={16} />
-            <Image src="/youtube.png" alt="" width={16} height={16} />
-            <Image src="/pinterest.png" alt="" width={16} height={16} />
-            <Image src="/x.png" alt="" width={16} height={16} />
+    <footer className="bg-black text-gray-300">
+      <br></br>
+      <br></br>
+      <div className="w-full h-auto flex items-center justify-center bg-black text-white overflow-hidden">
+        <VelocityScroll
+          text="Sale Discounts Brands Collections"
+          default_velocity={2}
+          className="text-2xl sm:text-4xl font-bold text-white"
+        />
+      </div>
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold text-white">STUDIO UNIVERSAL</h2>
+            <p className="text-sm">Elevate your style with our curated collection of modern, sustainable fashion.</p>
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-white">Quick Links</h3>
+            <nav className="flex flex-col space-y-2">
+              <a href="/about" className="text-sm hover:text-white transition-colors duration-200">About Us</a>
+              <a href="/list?cat=all-products" className="text-sm hover:text-white transition-colors duration-200">Shop</a>
+              <a href="/list?cat=collections" className="text-sm hover:text-white transition-colors duration-200">Collections</a>
+              <a href="/list?cat=sustainability" className="text-sm hover:text-white transition-colors duration-200">Sustainability</a>
+            </nav>
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-white">Customer Service</h3>
+            <nav className="flex flex-col space-y-2">
+              <a href="/contact" className="text-sm hover:text-white transition-colors duration-200">Contact Us</a>
+              <a href="/faq" className="text-sm hover:text-white transition-colors duration-200">FAQs</a>
+              <a href="/shipping" className="text-sm hover:text-white transition-colors duration-200">Shipping & Returns</a>
+              <a href="/sizeguide" className="text-sm hover:text-white transition-colors duration-200">Size Guide</a>
+            </nav>
           </div>
         </div>
-        {/* CENTER */}
-        <div className="hidden lg:flex justify-between w-1/2">
-          <div className="flex flex-col justify-between">
-            <h1 className="font-medium text-lg">COMPANY</h1>
-            <div className="flex flex-col gap-6">
-              <Link href="">About Us</Link>
-              <Link href="">Careers</Link>
-              <Link href="">Affiliates</Link>
-              <Link href="">Blog</Link>
-              <Link href="">Contact Us</Link>
-            </div>
-          </div>
-          <div className="flex flex-col justify-between">
-            <h1 className="font-medium text-lg">SHOP</h1>
-            <div className="flex flex-col gap-6">
-              <Link href="">New Arrivals</Link>
-              <Link href="">Accessories</Link>
-              <Link href="">Men</Link>
-              <Link href="">Women</Link>
-              <Link href="">All Products</Link>
-            </div>
-          </div>
-          <div className="flex flex-col justify-between">
-            <h1 className="font-medium text-lg">HELP</h1>
-            <div className="flex flex-col gap-6">
-              <Link href="">Customer Service</Link>
-              <Link href="">My Account</Link>
-              <Link href="">Find a Store</Link>
-              <Link href="">Legal & Privacy</Link>
-              <Link href="">Gift Card</Link>
-            </div>
-          </div>
-        </div>
-        {/* RIGHT */}
-        <div className="w-full md:w-1/2 lg:w-1/4 flex flex-col gap-8">
-          <h1 className="font-medium text-lg">SUBSCRIBE</h1>
-          <p>
-            Be the first to get the latest news about trends, promotions, and
-            much more!
+        
+        <div className="mt-8 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center">
+          <p className="text-sm text-gray-400 text-center sm:text-left">
+            © {new Date().getFullYear()} Studio Universal. All rights reserved.
           </p>
-          <div className="flex">
-            <input
-              type="text"
-              placeholder="Email address"
-              className="p-4 w-3/4"
-            />
-            <button className="w-1/4 bg-lama text-white">JOIN</button>
-          </div>
-          <span className="font-semibold">Secure Payments</span>
-          <div className="flex justify-between">
-            <Image src="/discover.png" alt="" width={40} height={20} />
-            <Image src="/skrill.png" alt="" width={40} height={20} />
-            <Image src="/paypal.png" alt="" width={40} height={20} />
-            <Image src="/mastercard.png" alt="" width={40} height={20} />
-            <Image src="/visa.png" alt="" width={40} height={20} />
-          </div>
+          <nav className="flex space-x-4 mt-4 sm:mt-0">
+            <a href="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+              Privacy Policy
+            </a>
+            <a href="/terms" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+              Terms of Service
+            </a>
+          </nav>
         </div>
       </div>
-      {/* BOTTOM */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-8 mt-16">
-        <div className="">© 2024 Lama Shop</div>
-        <div className="flex flex-col gap-8 md:flex-row">
-          <div className="">
-            <span className="text-gray-500 mr-4">Language</span>
-            <span className="font-medium">United States | English</span>
-          </div>
-          <div className="">
-            <span className="text-gray-500 mr-4">Currency</span>
-            <span className="font-medium">$ USD</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Footer;
+    </footer>
+  )
+}
