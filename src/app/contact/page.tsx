@@ -44,7 +44,7 @@ export default function ContactUs() {
                 <CardHeader>
                   <CardTitle className='text-white'>Get in Touch</CardTitle>
                   <CardDescription className="text-gray-400">
-                    We're here to help. Reach out to us through any of these channels.
+                    We&apos;re here to help. Reach out to us through any of these channels.
                   </CardDescription>
                 </CardHeader>
                 <CardContent  className="space-y-4 text-white">
@@ -80,7 +80,7 @@ export default function ContactUs() {
               <CardHeader>
                 <CardTitle>Send Us a Message</CardTitle>
                 <CardDescription className="text-gray-400">
-                  Fill out the form below and we'll get back to you as soon as possible.
+                  Fill out the form below and we&apos;ll get back to you as soon as possible.
                 </CardDescription>
               </CardHeader>
               <CardContent>

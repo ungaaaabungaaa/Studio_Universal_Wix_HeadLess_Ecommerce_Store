@@ -25,7 +25,7 @@ export default function AboutUsEnhanced() {
           </p>
           <p>
             We carefully source eco-friendly materials and partner with ethical manufacturers to bring you a
-            collection that's as kind to the planet as it is to your wardrobe. From timeless basics to statement
+            collection that&apos;s as kind to the planet as it is to your wardrobe. From timeless basics to statement
             pieces, each item in our store is designed to last, reducing waste and promoting a more sustainable
             approach to fashion.
           </p>

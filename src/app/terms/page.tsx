@@ -21,7 +21,7 @@ export default function TermsOfService() {
         </motion.p>
         <div className="space-y-6 text-gray-300">
           <p>
-            Welcome to Studio Universal! These Terms of Service ("Terms") govern your access to and use of our website
+            Welcome to Studio Universal! These Terms of Service (&quot;Terms&quot;) govern your access to and use of our website
             and services. By accessing or using our website, you agree to comply with and be bound by these Terms.
             Please read them carefully before using our services.
           </p>
