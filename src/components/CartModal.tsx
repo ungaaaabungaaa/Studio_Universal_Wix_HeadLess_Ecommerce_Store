@@ -104,7 +104,7 @@ const CartModal = () => {
           <div className="">
             <div className="flex items-center justify-between font-semibold">
               <span className="">Subtotal</span>
-              // @ts-ignore
+              {/* @ts-ignore */}
               <span className="">${cart.subtotal?.amount || 0}</span>
             </div>
             <p className="text-gray-500 text-sm mt-2 mb-4">
